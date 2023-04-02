@@ -1,0 +1,25 @@
+services:
+  #A background worker that consumes a queue
+  - type: worker
+    name: Forward-bot
+    env: python
+    buildCommand: pip3 install -r requirements.txt
+    startCommand: python3 main.py
+    repo: https://github.com/Pratikllp/plppublic-forward-bot
+    branch: master
+    plan: pro ultra
+    envVars:
+      - key: API_ID 
+        sync: false
+      - key: API_HASH 
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: OWNER_ID 
+        sync: false 
+    autoDeploy: true # optional
+    disk:
+      name: Forward-data
+      mountPath: /opt/src
+      sizeGB: eco
+
